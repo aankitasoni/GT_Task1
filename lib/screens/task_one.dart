@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:task1/Components/opposite_trapezium_clipper.dart';
+import 'package:task1/Components/save_list_clipper.dart';
 
 class TaskOne extends StatelessWidget {
   const TaskOne({super.key});
@@ -8,210 +10,147 @@ class TaskOne extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Positioned(
-            top: 215,
-            left: 28,
-            child: Container(
-              width: 3,
-              height: 55,
-              color: Colors.grey,
-            ),
-          ),
-          Positioned(
-            top: 185,
-            left: 45,
-            child: ClipPath(
-              clipper: OppositeTrapeziumClipper(),
-              child: Container(
-                width: 35,
-                height: 7,
-                color: Colors.grey,
-              ),
-            ),
-          ),
-          Positioned(
-            top: 190,
-            left: 78,
-            child: Container(
-              width: 10,
-              height: 3,
-              color: Colors.grey,
-            ),
-          ),
-          Positioned(
-            top: 190,
-            right: 78,
-            child: Container(
-              width: 10,
-              height: 3,
-              color: Colors.grey,
-            ),
-          ),
-          Positioned(
-            top: 185,
-            right: 45,
-            child: ClipPath(
-              clipper: OppositeTrapeziumClipper(),
-              child: Container(
-                width: 35,
-                height: 7,
-                color: Colors.grey,
-              ),
-            ),
-          ),
-          Positioned(
-            top: 203,
-            left: 35,
-            child: Transform(
-              transform: Matrix4.rotationZ(0.7527),
-              alignment: Alignment.topLeft,
-              child: Container(
-                width: 7,
-                height: 13,
-                color: Colors.grey,
-              ),
-            ),
-          ),
-          Positioned(
-            top: 218,
-            right: 34,
-            child: Transform(
-              transform: Matrix4.rotationZ(90 + 0.7527),
-              alignment: Alignment.topRight,
-              child: Container(
-                width: 7,
-                height: 11,
-                color: Colors.grey,
-              ),
-            ),
-          ),
-          Positioned(
-            top: 215,
-            right: 28,
-            child: Container(
-              width: 6,
-              height: 55,
-              color: Colors.grey,
-            ),
-          ),
-          Center(
-            child: Stack(
-              alignment: Alignment.topCenter,
-              children: [
-                CustomPaint(
-                  painter: CustomClipperBorderPainter(),
-                  child: ClipPath(
-                    clipper: CustomClipperPath(),
-                    child: Container(
-                      width: 300,
-                      height: 400,
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        border: Border.all(
-                          color: Colors.grey,
-                          width: 2.5,
-                        ),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black26,
-                            offset: Offset(-10, 10),
-                            blurRadius: 12,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 23,
-                  left: -20,
-                  child: Container(
-                    width: 24,
-                    height: 55,
-                    color: Colors.grey,
-                  ),
-                ),
-                Positioned(
-                  top: 0,
-                  left: 15,
-                  child: Container(
-                    width: 43,
-                    height: 3,
-                    color: Colors.grey,
-                  ),
-                ),
-                Positioned(
-                  top: 0,
-                  right: 15,
-                  child: Container(
-                    width: 43,
-                    height: 3,
-                    color: Colors.grey,
-                  ),
-                ),
-                Positioned(
-                  top: 23,
-                  right: -20,
-                  child: Container(
-                    width: 24,
-                    height: 55,
-                    color: Colors.grey,
-                  ),
-                ),
-                Positioned(
-                  top: 0,
-                  left: 15,
-                  child: Transform(
-                    transform: Matrix4.rotationZ(0.7527),
-                    alignment: Alignment.topLeft,
-                    child: Container(
-                      width: 7,
-                      height: 35,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 0,
-                  right: 15,
-                  child: Transform(
-                    transform: Matrix4.rotationZ(-0.7527),
-                    alignment: Alignment.topRight,
-                    child: Container(
-                      width: 7,
-                      height: 35,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 2,
-                  child: ClipPath(
-                    clipper: SaveListClipper(),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      width: 140,
-                      height: 40,
-                      decoration: const BoxDecoration(
-                        color: Colors.redAccent,
-                      ),
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'SAVE LIST',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          _buildVerticalLine(top: 215, left: 28, width: 3, height: 55),
+          _buildOppositeTrapezium(top: 185, left: 45),
+          _buildHorizontalLine(top: 190, left: 78, width: 10),
+          _buildHorizontalLine(top: 190, right: 78, width: 10),
+          _buildOppositeTrapezium(top: 185, right: 45),
+          _buildRotatedLine(top: 203, left: 35, width: 7, height: 13, angle: 0.7527),
+          _buildRotatedLine(top: 218, right: 34, width: 7, height: 11, angle: 90 + 0.7527),
+          _buildVerticalLine(top: 215, right: 28, width: 6, height: 55),
+          _buildCenterBox(),
         ],
+      ),
+    );
+  }
+
+  // Reusable widget for vertical line
+  Widget _buildVerticalLine({required double top, double? left, double? right, required double width, required double height}) {
+    return Positioned(
+      top: top,
+      left: left,
+      right: right,
+      child: Container(
+        width: width,
+        height: height,
+        color: Colors.grey,
+      ),
+    );
+  }
+
+  // Reusable widget for horizontal line
+  Widget _buildHorizontalLine({required double top, double? left, double? right, required double width}) {
+    return Positioned(
+      top: top,
+      left: left,
+      right: right,
+      child: Container(
+        width: width,
+        height: 3,
+        color: Colors.grey,
+      ),
+    );
+  }
+
+  // Reusable widget for rotated line
+  Widget _buildRotatedLine({required double top, double? left, double? right, required double width, required double height, required double angle}) {
+    return Positioned(
+      top: top,
+      left: left,
+      right: right,
+      child: Transform(
+        transform: Matrix4.rotationZ(angle),
+        alignment: Alignment.topLeft,
+        child: Container(
+          width: width,
+          height: height,
+          color: Colors.grey,
+        ),
+      ),
+    );
+  }
+
+  // Reusable widget for trapezium shape
+  Widget _buildOppositeTrapezium({required double top, double? left, double? right}) {
+    return Positioned(
+      top: top,
+      left: left,
+      right: right,
+      child: ClipPath(
+        clipper: OppositeTrapeziumClipper(),
+        child: Container(
+          width: 35,
+          height: 7,
+          color: Colors.grey,
+        ),
+      ),
+    );
+  }
+
+
+  Widget _buildCenterBox() {
+    return Center(
+      child: Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          CustomPaint(
+            painter: CustomClipperBorderPainter(),
+            child: ClipPath(
+              clipper: CustomClipperPath(),
+              child: Container(
+                width: 300,
+                height: 400,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  border: Border.all(
+                    color: Colors.white70,
+                    width: 2.5,
+                  ),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black26,
+                      offset: Offset(-10, 10),
+                      blurRadius: 12,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          _buildVerticalLine(top: 23, left: -20, width: 24, height: 55),
+          _buildHorizontalLine(top: 0, left: 15, width: 43),
+          _buildHorizontalLine(top: 0, right: 15, width: 43),
+          _buildVerticalLine(top: 23, right: -20, width: 24, height: 55),
+          _buildRotatedLine(top: 0, left: 15, width: 7, height: 35, angle: 0.7527),
+          _buildRotatedLine(top: 0, right: 15, width: 7, height: 35, angle: -0.7527),
+          _buildSaveList(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSaveList() {
+    return Positioned(
+      top: 2,
+      child: ClipPath(
+        clipper: SaveListClipper(),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          width: 140,
+          height: 40,
+          decoration: const BoxDecoration(
+            color: Colors.redAccent,
+          ),
+          alignment: Alignment.center,
+          child: const Text(
+            'SAVE LIST',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -220,26 +159,21 @@ class TaskOne extends StatelessWidget {
 class CustomClipperPath extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    var path = Path();
     double cornerSize = 20.0;
-
-    path.moveTo(0, cornerSize);
-    path.lineTo(cornerSize, 0);
-    path.lineTo(size.width - cornerSize, 0);
-    path.lineTo(size.width, cornerSize);
-    path.lineTo(size.width, size.height - cornerSize);
-    path.lineTo(size.width - cornerSize, size.height);
-    path.lineTo(cornerSize, size.height);
-    path.lineTo(0, size.height - cornerSize);
-    path.close();
-
-    return path;
+    return Path()
+      ..moveTo(0, cornerSize)
+      ..lineTo(cornerSize, 0)
+      ..lineTo(size.width - cornerSize, 0)
+      ..lineTo(size.width, cornerSize)
+      ..lineTo(size.width, size.height - cornerSize)
+      ..lineTo(size.width - cornerSize, size.height)
+      ..lineTo(cornerSize, size.height)
+      ..lineTo(0, size.height - cornerSize)
+      ..close();
   }
 
   @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return false;
-  }
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
 
 class CustomClipperBorderPainter extends CustomPainter {
@@ -247,30 +181,30 @@ class CustomClipperBorderPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     double cornerSize = 20.0;
 
-    var path = Path();
-    path.moveTo(0, cornerSize);
-    path.lineTo(cornerSize, 0);
-    path.lineTo(size.width - cornerSize, 0);
-    path.lineTo(size.width, cornerSize);
-    path.lineTo(size.width, size.height - cornerSize);
-    path.lineTo(size.width - cornerSize, size.height);
-    path.lineTo(cornerSize, size.height);
-    path.lineTo(0, size.height - cornerSize);
-    path.close();
+    var path = Path()
+      ..moveTo(0, cornerSize)
+      ..lineTo(cornerSize, 0)
+      ..lineTo(size.width - cornerSize, 0)
+      ..lineTo(size.width, cornerSize)
+      ..lineTo(size.width, size.height - cornerSize)
+      ..lineTo(size.width - cornerSize, size.height)
+      ..lineTo(cornerSize, size.height)
+      ..lineTo(0, size.height - cornerSize)
+      ..close();
 
-    var shadowPathLeft = Path();
-    shadowPathLeft.moveTo(0, size.height - cornerSize);
-    shadowPathLeft.lineTo(0, size.height);
-    shadowPathLeft.lineTo(cornerSize, size.height);
-    shadowPathLeft.lineTo(cornerSize, size.height - cornerSize);
-    shadowPathLeft.close();
+    var shadowPathLeft = Path()
+      ..moveTo(0, size.height - cornerSize)
+      ..lineTo(0, size.height)
+      ..lineTo(cornerSize, size.height)
+      ..lineTo(cornerSize, size.height - cornerSize)
+      ..close();
 
-    var shadowPathRight = Path();
-    shadowPathRight.moveTo(size.width, size.height - cornerSize);
-    shadowPathRight.lineTo(size.width, size.height);
-    shadowPathRight.lineTo(size.width - cornerSize, size.height);
-    shadowPathRight.lineTo(size.width - cornerSize, size.height - cornerSize);
-    shadowPathRight.close();
+    var shadowPathRight = Path()
+      ..moveTo(size.width, size.height - cornerSize)
+      ..lineTo(size.width, size.height)
+      ..lineTo(size.width - cornerSize, size.height)
+      ..lineTo(size.width - cornerSize, size.height - cornerSize)
+      ..close();
 
     var shadowPaintLeft = Paint()
       ..color = Colors.black.withOpacity(0.7)
@@ -297,48 +231,5 @@ class CustomClipperBorderPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
-  }
-}
-
-class SaveListClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var path = Path();
-    double cutSize = 20;
-
-    path.moveTo(0, 0);
-    path.lineTo(size.width, 0);
-    path.lineTo(size.width - cutSize, size.height);
-    path.lineTo(cutSize, size.height);
-    path.close();
-
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return false;
-  }
-}
-
-class OppositeTrapeziumClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var path = Path();
-
-    path.moveTo(0, size.height);
-    path.lineTo(size.width * 0.2, 0);
-    path.lineTo(size.width * 0.8, 0);
-    path.lineTo(size.width, size.height);
-    path.close();
-
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return false;
-  }
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
