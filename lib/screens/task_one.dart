@@ -284,7 +284,7 @@ class CustomClipperBorderPainter extends CustomPainter {
     canvas.drawPath(shadowPathRight, shadowPaintRight);
 
     var borderPaint = Paint()
-      ..color = Colors.purple
+      ..color = Colors.white
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3.8;
 
