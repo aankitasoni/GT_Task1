@@ -7,65 +7,92 @@ class TaskOne extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Stack(
-          alignment: Alignment.topCenter,
-          children: [
-            CustomPaint(
-              painter: CustomClipperBorderPainter(),
-              child: ClipPath(
-                clipper: CustomClipperPath(),
-                child: Container(
-                  width: 300,
-                  height: 400,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    border: Border.all(
-                      color: Colors.grey,
-                      width: 2.5,
-                    ),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.black26,
-                        offset: Offset(-10, 10),
-                        blurRadius: 12,
+        child: Container(
+          height: 500,
+          child: Stack(
+            alignment: Alignment.topCenter,
+            children: [
+              CustomPaint(
+                painter: CustomClipperBorderPainter(),
+                child: ClipPath(
+                  clipper: CustomClipperPath(),
+                  child: Container(
+                    width: 300,
+                    height: 400,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      border: Border.all(
+                        color: Colors.grey,
+                        width: 2.5,
                       ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              top: -9,
-              child: ClipPath(
-                clipper: SaveListClipper(),
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  width: 140,
-                  height: 40,
-                  decoration: const BoxDecoration(
-                    color: Colors.redAccent,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black26,
-                        offset: Offset(0, 4),
-                        blurRadius: 8,
-                      ),
-                    ],
-                  ),
-                  alignment: Alignment.center,
-                  child: const Text(
-                    'SAVE LIST',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black26,
+                          offset: Offset(-10, 10),
+                          blurRadius: 12,
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+              Positioned(
+                top: 20,
+                left: -20,
+                child: Container(
+                  width: 26,
+                  height: 50,
+                  color: Colors.redAccent,
+                ),
+              ),
+              Positioned(
+                top: 0,
+                left: 15,
+                child: Transform(
+                  transform: Matrix4.rotationZ(0.7527),
+                  alignment: Alignment.topLeft,
+                  child: Container(
+                    width: 7,
+                    height: 35,
+                    color: Colors.yellow,
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 24,
+                right: -20,
+                child: Container(
+                  width: 25,
+                  height: 50,
+                  color: Colors.redAccent,
+                ),
+              ),
+              Positioned(
+                top: 2,
+                child: ClipPath(
+                  clipper: SaveListClipper(),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
+                    width: 140,
+                    height: 40,
+                    decoration: const BoxDecoration(
+                      color: Colors.redAccent,
+                    ),
+                    alignment: Alignment.center,
+                    child: const Text(
+                      'SAVE LIST',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -139,7 +166,7 @@ class CustomClipperBorderPainter extends CustomPainter {
     canvas.drawPath(shadowPathRight, shadowPaintRight);
 
     var borderPaint = Paint()
-      ..color = Colors.white70
+      ..color = Colors.purple
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3.8;
 
