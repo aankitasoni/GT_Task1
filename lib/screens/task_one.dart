@@ -10,13 +10,91 @@ class TaskOne extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
+          Positioned(
+            top: 203,
+            left: 38,
+            child: Container(
+              width: 3,
+              height: 365,
+              decoration: const BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black,
+                    offset: Offset(-10, 10),
+                    blurRadius: 4,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            top: 580,
+            left: 25,
+            child: Transform(
+              alignment: Alignment.center,
+              transform: Matrix4.rotationZ(0.8),
+              child: Container(
+                width: 28,
+                height: 3,
+                decoration: const BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black,
+                      offset: Offset(5, 5),
+                      blurRadius: 2.5,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 584,
+            left: 59,
+            child: Container(
+              width: 260,
+              height: 3,
+              decoration: const BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black,
+                    offset: Offset(-10, 10),
+                    blurRadius: 2.5,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            top: 594,
+            right: 25,
+            child: Transform(
+              alignment: Alignment.center,
+              transform: Matrix4.rotationZ(-0.8),
+              child: Container(
+                width: 28,
+                height: 2.5,
+                decoration: const BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black,
+                      offset: Offset(5, -7),
+                      blurRadius: 6,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
           _buildVerticalLine(top: 215, left: 28, width: 3, height: 55),
           _buildOppositeTrapezium(top: 185, left: 45),
           _buildHorizontalLine(top: 190, left: 78, width: 10),
           _buildHorizontalLine(top: 190, right: 78, width: 10),
           _buildOppositeTrapezium(top: 185, right: 45),
-          _buildRotatedLine(top: 203, left: 35, width: 7, height: 13, angle: 0.7527),
-          _buildRotatedLine(top: 218, right: 34, width: 7, height: 11, angle: 90 + 0.7527),
+          _buildRotatedLine(
+              top: 203, left: 35, width: 7, height: 13, angle: 0.7527),
+          _buildRotatedLine(
+              top: 218, right: 34, width: 7, height: 11, angle: 90 + 0.7527),
           _buildVerticalLine(top: 215, right: 28, width: 6, height: 55),
           _buildCenterBox(),
         ],
@@ -24,8 +102,12 @@ class TaskOne extends StatelessWidget {
     );
   }
 
-  // Reusable widget for vertical line
-  Widget _buildVerticalLine({required double top, double? left, double? right, required double width, required double height}) {
+  Widget _buildVerticalLine(
+      {required double top,
+        double? left,
+        double? right,
+        required double width,
+        required double height}) {
     return Positioned(
       top: top,
       left: left,
@@ -38,8 +120,11 @@ class TaskOne extends StatelessWidget {
     );
   }
 
-  // Reusable widget for horizontal line
-  Widget _buildHorizontalLine({required double top, double? left, double? right, required double width}) {
+  Widget _buildHorizontalLine(
+      {required double top,
+        double? left,
+        double? right,
+        required double width}) {
     return Positioned(
       top: top,
       left: left,
@@ -52,8 +137,13 @@ class TaskOne extends StatelessWidget {
     );
   }
 
-  // Reusable widget for rotated line
-  Widget _buildRotatedLine({required double top, double? left, double? right, required double width, required double height, required double angle}) {
+  Widget _buildRotatedLine(
+      {required double top,
+        double? left,
+        double? right,
+        required double width,
+        required double height,
+        required double angle}) {
     return Positioned(
       top: top,
       left: left,
@@ -70,8 +160,8 @@ class TaskOne extends StatelessWidget {
     );
   }
 
-  // Reusable widget for trapezium shape
-  Widget _buildOppositeTrapezium({required double top, double? left, double? right}) {
+  Widget _buildOppositeTrapezium(
+      {required double top, double? left, double? right}) {
     return Positioned(
       top: top,
       left: left,
@@ -86,7 +176,6 @@ class TaskOne extends StatelessWidget {
       ),
     );
   }
-
 
   Widget _buildCenterBox() {
     return Center(
@@ -121,8 +210,10 @@ class TaskOne extends StatelessWidget {
           _buildHorizontalLine(top: 0, left: 15, width: 43),
           _buildHorizontalLine(top: 0, right: 15, width: 43),
           _buildVerticalLine(top: 23, right: -20, width: 24, height: 55),
-          _buildRotatedLine(top: 0, left: 15, width: 7, height: 35, angle: 0.7527),
-          _buildRotatedLine(top: 0, right: 15, width: 7, height: 35, angle: -0.7527),
+          _buildRotatedLine(
+              top: 0, left: 15, width: 7, height: 35, angle: 0.7527),
+          _buildRotatedLine(
+              top: 0, right: 15, width: 7, height: 35, angle: -0.7527),
           _buildSaveList(),
         ],
       ),
@@ -191,31 +282,6 @@ class CustomClipperBorderPainter extends CustomPainter {
       ..lineTo(cornerSize, size.height)
       ..lineTo(0, size.height - cornerSize)
       ..close();
-
-    var shadowPathLeft = Path()
-      ..moveTo(0, size.height - cornerSize)
-      ..lineTo(0, size.height)
-      ..lineTo(cornerSize, size.height)
-      ..lineTo(cornerSize, size.height - cornerSize)
-      ..close();
-
-    var shadowPathRight = Path()
-      ..moveTo(size.width, size.height - cornerSize)
-      ..lineTo(size.width, size.height)
-      ..lineTo(size.width - cornerSize, size.height)
-      ..lineTo(size.width - cornerSize, size.height - cornerSize)
-      ..close();
-
-    var shadowPaintLeft = Paint()
-      ..color = Colors.black.withOpacity(0.7)
-      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 3);
-
-    var shadowPaintRight = Paint()
-      ..color = Colors.black.withOpacity(0.5)
-      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10);
-
-    canvas.drawPath(shadowPathLeft, shadowPaintLeft);
-    canvas.drawPath(shadowPathRight, shadowPaintRight);
 
     var borderPaint = Paint()
       ..color = Colors.white
