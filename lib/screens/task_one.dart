@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:task1/Components/opposite_trapezium_clipper.dart';
 import 'package:task1/Components/save_list_clipper.dart';
 
@@ -11,11 +12,11 @@ class TaskOne extends StatelessWidget {
       body: Stack(
         children: [
           Positioned(
-            top: 203,
-            left: 38,
+            top: 26.3.h,
+            left: 10.w,
             child: Container(
               width: 3,
-              height: 365,
+              height: 45.5.h,
               decoration: const BoxDecoration(
                 boxShadow: [
                   BoxShadow(
@@ -28,8 +29,8 @@ class TaskOne extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 580,
-            left: 25,
+            top: 73.2.h,
+            left: 6.9.w,
             child: Transform(
               alignment: Alignment.center,
               transform: Matrix4.rotationZ(0.8),
@@ -49,8 +50,8 @@ class TaskOne extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 584,
-            left: 59,
+            top: 73.9.h,
+            left: 16.6.w,
             child: Container(
               width: 260,
               height: 3,
@@ -66,8 +67,8 @@ class TaskOne extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 594,
-            right: 25,
+            top: 75.h,
+            right: 6.5.w,
             child: Transform(
               alignment: Alignment.center,
               transform: Matrix4.rotationZ(-0.8),
@@ -86,16 +87,19 @@ class TaskOne extends StatelessWidget {
               ),
             ),
           ),
-          _buildVerticalLine(top: 215, left: 28, width: 3, height: 55),
-          _buildOppositeTrapezium(top: 185, left: 45),
-          _buildHorizontalLine(top: 190, left: 78, width: 10),
-          _buildHorizontalLine(top: 190, right: 78, width: 10),
-          _buildOppositeTrapezium(top: 185, right: 45),
+
+
+          _buildVerticalLine(top: 27.8.h, left: 7.8.w, width: 3, height: 55),
+          _buildVerticalLine(top: 27.8.h, right: 8.w, width: 6, height: 55),
           _buildRotatedLine(
-              top: 203, left: 35, width: 7, height: 13, angle: 0.7527),
+              top: 26.5.h, left: 9.55.w, width: 7, height: 13, angle: 0.7127),
           _buildRotatedLine(
-              top: 218, right: 34, width: 7, height: 11, angle: 90 + 0.7527),
-          _buildVerticalLine(top: 215, right: 28, width: 6, height: 55),
+              top: 28.5.h, right: 5.9.w, width: 7, height: 12, angle: 90 + 0.9927),
+          _buildOppositeTrapezium(top: 24.19.h, left: 12.5.w),
+          _buildOppositeTrapezium(top: 24.19.h, right: 11.9.w),
+          _buildHorizontalLine(top: 24.65.h, left: 21.3.w, width: 11),
+          _buildHorizontalLine(top: 24.65.h, right: 20.8.w, width: 13),
+
           _buildCenterBox(),
         ],
       ),
@@ -187,8 +191,8 @@ class TaskOne extends StatelessWidget {
             child: ClipPath(
               clipper: CustomClipperPath(),
               child: Container(
-                width: 300,
-                height: 400,
+                width: 83.w,
+                height: 50.h,
                 decoration: BoxDecoration(
                   color: Colors.black,
                   border: Border.all(
